@@ -20,7 +20,7 @@ export class HomePage {
   status: Observable<string>;
   playing: IPlaying;
   player: string;
-  playerList: string[];
+  playerList: string[] = [];
   addPlayer() {
     if (this.player) {
       this.playerList.unshift(this.player);

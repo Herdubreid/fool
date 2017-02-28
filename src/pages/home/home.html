@@ -29,6 +29,6 @@
 <ion-footer padding>
   <ion-navbar>
     <button ion-button full (click)="play()" [disabled]="(status | async) === 'STATUS_READY'" >Continue Round</button>
-    <button ion-button full (click)="newRound()">New Round</button>
+    <button ion-button full (click)="newRound()" [disabled]="playerList.length < 3" >New Round</button>
   </ion-navbar>
 </ion-footer>
