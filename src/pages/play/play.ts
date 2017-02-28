@@ -83,7 +83,7 @@ export class PlayPage {
           this.games = games;
           this.sayer = games.length % 3;
           this.says = [...this.allSays];
-          this.played = games.filter((val, i) => { return (i % 3) === this.sayer });
+          this.played = games.filter((val, i) => { return ((games.length - i - 1) % 3) === this.sayer });
           this.played.forEach(game => {
             this.says = [
               ...this.says.slice(0, this.says.findIndex(say => { return say.type === game.say.type })),

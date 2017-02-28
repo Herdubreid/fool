@@ -33,7 +33,7 @@
           Sayer
         </ion-label>
         <div item-content>
-          {{ playing.players[(playing.current - gameNumber - 1) % 3] }}
+          {{ playing.players[(games.length - gameNumber - 1) % 3] }}
         </div>
       </ion-item>
       <ion-item>
