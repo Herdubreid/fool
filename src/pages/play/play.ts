@@ -4,7 +4,6 @@ import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs/Subscription';
 
 import { ScorePage } from '../score/score';
-import { PointsComponent } from '../../components/points';
 import { IGame, IPlaying, ISay, SAY_TYPES } from '../../data/defs';
 import { IState, ADJUST_SCORE } from '../../data/state';
 
@@ -23,6 +22,7 @@ export class PlayPage {
   played: IGame[];
   games: IGame[];
   sayer: number;
+  points: number[];
   allSays: ISay[] = [
     { type: SAY_TYPES.grand, title: 'Grand' },
     { type: SAY_TYPES.spade, title: 'Spade' },
@@ -30,7 +30,7 @@ export class PlayPage {
     { type: SAY_TYPES.nolo, title: 'Nolo' }
   ];
   says: ISay[];
-  get game():string {
+  get game(): string {
     if (this.playing.current < 12) {
       return `Play - Game ${this.playing.current + 1}`;
     } else {
@@ -80,7 +80,13 @@ export class PlayPage {
       .select<IGame[]>('games')
       .subscribe(games => {
         if (games) {
+          this.points = [0, 0, 0];
           this.games = games;
+          games.forEach(game => {
+            this.points[0] += game.points[0];
+            this.points[1] += game.points[1];
+            this.points[2] += game.points[2];
+          });
           this.sayer = games.length % 3;
           this.says = [...this.allSays];
           this.played = games.filter((val, i) => { return ((games.length - i - 1) % 3) === this.sayer });

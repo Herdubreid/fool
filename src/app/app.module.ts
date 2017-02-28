@@ -12,7 +12,6 @@ import { HomePage } from '../pages/home/home';
 import { PlayPage } from '../pages/play/play';
 import { ScorePage } from '../pages/score/score';
 import { AboutPage } from '../pages/about/about';
-import { PointsComponent } from '../components/points/points';
 
 @NgModule({
   declarations: [
@@ -20,8 +19,7 @@ import { PointsComponent } from '../components/points/points';
     HomePage,
     PlayPage,
     ScorePage,
-    AboutPage,
-    PointsComponent
+    AboutPage
   ],
   imports: [
     IonicModule.forRoot(MyApp),

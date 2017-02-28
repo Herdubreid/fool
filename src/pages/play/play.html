@@ -9,7 +9,7 @@
 
 <ion-content padding>
   <ion-list>
-    <ion-item>
+    <ion-item *ngIf="playing.current < 12">
       <ion-label>Player</ion-label>
       <div item-content>
         {{ playing.players[sayer] }}
@@ -20,24 +20,51 @@
         {{ each.title }}
       </button>
     </ion-item-group>
-    <points></points>
-    <button *ngIf="playing.current" ion-button full (click)="adjust()">
-      Adjust Last Score
-    </button>
     <ion-list-header>
-      Games
+      Total Score
     </ion-list-header>
-    <ion-item-group *ngFor="let game of games; let gameNumber = index">
+    <ion-item-group>
       <ion-item>
         <ion-label>
+          {{ playing.players[0] }}
+        </ion-label>
+        <div item-content>
+          {{ points[0] }}
+        </div>
+      </ion-item>
+      <ion-item>
+        <ion-label>
+          {{ playing.players[1] }}
+        </ion-label>
+        <div item-content>
+          {{ points[1] }}
+        </div>
+      </ion-item>
+      <ion-item>
+        <ion-label>
+          {{ playing.players[2] }}
+        </ion-label>
+        <div item-content>
+          {{ points[2] }}
+        </div>
+      </ion-item>
+    </ion-item-group> <button *ngIf="playing.current" ion-button full (click)="adjust()">
+      Adjust Last Score
+    </button>
+    <ion-item-group *ngFor="let game of games; let gameNumber = index">
+      <ion-list-header>
+        Game {{ games.length - gameNumber }}
+      </ion-list-header>
+      <ion-item no-lines>
+        <ion-label stacked>
           Sayer
         </ion-label>
         <div item-content>
           {{ playing.players[(games.length - gameNumber - 1) % 3] }}
         </div>
       </ion-item>
-      <ion-item>
-        <ion-label>
+      <ion-item no-lines>
+        <ion-label stacked>
           Played
         </ion-label>
         <div item-content>
@@ -51,7 +78,7 @@
               Player
             </ion-col>
             <ion-col>
-              Score
+              Tricks
             </ion-col>
             <ion-col>
               Points
