@@ -1,0 +1,75 @@
+<!--
+  Play page.
+-->
+<ion-header>
+  <ion-navbar>
+    <ion-title>{{ game }}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-list>
+    <ion-item>
+      <ion-label>Player</ion-label>
+      <div item-content>
+        {{ playing.players[sayer] }}
+      </div>
+    </ion-item>
+    <ion-item-group>
+      <button ion-button full *ngFor="let each of says" (click)="say(each)">
+        {{ each.title }}
+      </button>
+    </ion-item-group>
+    <points></points>
+    <button *ngIf="playing.current" ion-button full (click)="adjust()">
+      Adjust Last Score
+    </button>
+    <ion-list-header>
+      Games
+    </ion-list-header>
+    <ion-item-group *ngFor="let game of games; let gameNumber = index">
+      <ion-item>
+        <ion-label>
+          Sayer
+        </ion-label>
+        <div item-content>
+          {{ playing.players[(playing.current - gameNumber - 1) % 3] }}
+        </div>
+      </ion-item>
+      <ion-item>
+        <ion-label>
+          Played
+        </ion-label>
+        <div item-content>
+          {{ game.say.title }}
+        </div>
+      </ion-item>
+      <ion-item>
+        <ion-grid padding>
+          <ion-row>
+            <ion-col>
+              Player
+            </ion-col>
+            <ion-col>
+              Score
+            </ion-col>
+            <ion-col>
+              Points
+            </ion-col>
+          </ion-row>
+          <ion-row *ngFor="let player of playing.players; let playerNumber = index">
+            <ion-col>
+              {{ player }}
+            </ion-col>
+            <ion-col>
+              {{ game.score[playerNumber] }}
+            </ion-col>
+            <ion-col>
+              {{ game.points[playerNumber] }}
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-item>
+    </ion-item-group>
+  </ion-list>
+</ion-content>

@@ -1,0 +1,53 @@
+<!--
+  Score page.
+-->
+<ion-header>
+  <ion-navbar>
+    <ion-title>Score - Game {{ playing.current + 1}}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-list>
+    <ion-item>
+      <ion-label>Player</ion-label>
+      <div item-content>
+        {{ playing.players[sayer] }}
+      </div>
+    </ion-item>
+    <ion-item>
+      <ion-label>Game</ion-label>
+      <div item-content>
+        {{ playing.say.title }}
+      </div>
+    </ion-item>
+    <ion-item>
+      <ion-label>{{ playing.players[0] }}</ion-label>
+      <ion-range min="0" max="16" step="1" pin="true" snaps="true" [(ngModel)]="playing.score[0]" (ionChange)="score()">
+        <ion-label range-left>{{ playing.points[0] }}</ion-label>
+        <ion-label range-right>{{ playing.score[0] }}</ion-label>
+      </ion-range>
+    </ion-item>
+    <ion-item>
+      <ion-label>{{ playing.players[1] }}</ion-label>
+      <ion-range min="0" max="16" step="1" pin="true" snaps="true" [(ngModel)]="playing.score[1]" (ionChange)="score()">
+        <ion-label range-left>{{ playing.points[1] }}</ion-label>
+        <ion-label range-right>{{ playing.score[1] }}</ion-label>
+      </ion-range>
+    </ion-item>
+    <ion-item>
+      <ion-label>{{ playing.players[2] }}</ion-label>
+      <ion-range min="0" max="16" step="1" pin="true" snaps="true" [(ngModel)]="playing.score[2]" (ionChange)="score()">
+        <ion-label range-left>{{ playing.points[2] }}</ion-label>
+        <ion-label range-right>{{ playing.score[2] }}</ion-label>
+      </ion-range>
+    </ion-item>
+  </ion-list>
+</ion-content>
+
+<ion-footer padding>
+  <ion-navbar>
+    <ion-title *ngIf="remaining">Remaining {{ remaining }}</ion-title>
+    <button ion-button full (click)="continue()" [disabled]="remaining">Continue</button>
+  </ion-navbar>
+</ion-footer>
