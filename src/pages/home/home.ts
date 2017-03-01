@@ -29,6 +29,11 @@ export class HomePage {
         .playerList = new Promise((resolve) => { resolve(this.playerList) });
     }
   }
+  deletePlayer(index) {
+    this.playerList.splice(index, 1);
+    this.storage
+      .playerList = new Promise((resolve) => { resolve(this.playerList) });
+  }
   arrange(indexes) {
     this.playerList = reorderArray(this.playerList, indexes);
   }

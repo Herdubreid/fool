@@ -19,16 +19,23 @@
       </button>
     </ion-item>
     <ion-item-group reorder="true" (ionItemReorder)="arrange($event)">
-      <ion-item full *ngFor="let each of playerList">
-        {{ each }}
-      </ion-item>
+      <ion-item-sliding *ngFor="let each of playerList; let i = index">
+        <ion-item-options side="right">
+          <button ion-button icon-only (click)="deletePlayer(i)">
+              <ion-icon name="trash"></ion-icon>
+            </button>
+        </ion-item-options>
+        <ion-item full>
+          {{ each }}
+        </ion-item>
+      </ion-item-sliding>
     </ion-item-group>
   </ion-list>
 </ion-content>
 
 <ion-footer padding>
   <ion-navbar>
-    <button ion-button full (click)="play()" [disabled]="(status | async) === 'STATUS_READY'" >Continue Round</button>
-    <button ion-button full (click)="newRound()" [disabled]="playerList.length < 3" >New Round</button>
+    <button ion-button full (click)="play()" [disabled]="(status | async) === 'STATUS_READY'">Continue Round</button>
+    <button ion-button full (click)="newRound()" [disabled]="playerList.length < 3">New Round</button>
   </ion-navbar>
 </ion-footer>
